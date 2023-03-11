@@ -1,0 +1,8 @@
+name: Duschpalast
+version: '${project.version}'
+main: de.knacrack.journeymc.Main
+api-version: 1.19
+prefix: JourneyMC
+authors: [ Knacrack ]
+description: A Plugin which enhances the vanilla Minecraft Server feeling.
+website: knacrack.de
