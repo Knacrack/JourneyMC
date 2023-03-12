@@ -64,6 +64,11 @@ public class ItemSingleton {
         return registeredItem.stream().collect(Collectors.toMap(Item::getLabel, item -> item));
     }
 
+    public Map<String, Item> getRegisteredItemsByClassName() {
+        //return registeredItem.stream().map(Item::).collect(Collectors.toList());
+        return registeredItem.stream().collect(Collectors.toMap(name -> name.getClass().getSimpleName(), item -> item));
+    }
+
     public List<String> getUnregisteredItemNames() {
         return unregisteredItem.stream().map(Item::getLabel).collect(Collectors.toList());
     }
