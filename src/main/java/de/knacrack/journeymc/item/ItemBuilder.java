@@ -26,12 +26,12 @@ public class ItemBuilder {
         this.meta = item.getItemMeta();
     }
 
-    ItemBuilder(Material material) {
+    public ItemBuilder(Material material) {
         this.item = new ItemStack(material);
         this.meta = this.item.getItemMeta();
     }
 
-    ItemBuilder addStringTag(NamespacedKey key, String value) {
+    public ItemBuilder addStringTag(NamespacedKey key, String value) {
         PersistentDataContainer container = this.meta.getPersistentDataContainer();
         if (!this.meta.getPersistentDataContainer().has(key)) {
             this.meta.getPersistentDataContainer().set(key, PersistentDataType.STRING, value);
@@ -39,7 +39,7 @@ public class ItemBuilder {
         return this;
     }
 
-    ItemBuilder addIntegerTag(NamespacedKey key, Integer value) {
+    public ItemBuilder addIntegerTag(NamespacedKey key, Integer value) {
         PersistentDataContainer container = this.meta.getPersistentDataContainer();
         if (!this.meta.getPersistentDataContainer().has(key)) {
             this.meta.getPersistentDataContainer().set(key, PersistentDataType.INTEGER, value);
@@ -47,7 +47,7 @@ public class ItemBuilder {
         return this;
     }
 
-    ItemBuilder addDoubleTag(NamespacedKey key, Double value) {
+    public ItemBuilder addDoubleTag(NamespacedKey key, Double value) {
         PersistentDataContainer container = this.meta.getPersistentDataContainer();
         if (!this.meta.getPersistentDataContainer().has(key)) {
             this.meta.getPersistentDataContainer().set(key, PersistentDataType.DOUBLE, value);
@@ -55,7 +55,7 @@ public class ItemBuilder {
         return this;
     }
 
-    ItemBuilder addContainerTag(NamespacedKey key, Long value) {
+    public ItemBuilder addLongTag(NamespacedKey key, Long value) {
         PersistentDataContainer container = this.meta.getPersistentDataContainer();
         if (!this.meta.getPersistentDataContainer().has(key)) {
             this.meta.getPersistentDataContainer().set(key, PersistentDataType.LONG, value);
@@ -63,7 +63,7 @@ public class ItemBuilder {
         return this;
     }
 
-    ItemBuilder addContainerTag(NamespacedKey key, PersistentDataContainer value) {
+    public ItemBuilder addContainerTag(NamespacedKey key, PersistentDataContainer value) {
         PersistentDataContainer container = this.meta.getPersistentDataContainer();
         if (!this.meta.getPersistentDataContainer().has(key)) {
             this.meta.getPersistentDataContainer().set(key, PersistentDataType.TAG_CONTAINER, value);
@@ -71,7 +71,7 @@ public class ItemBuilder {
         return this;
     }
 
-    ItemBuilder addContainerTag(NamespacedKey key, Byte value) {
+    public ItemBuilder addByteTag(NamespacedKey key, Byte value) {
         PersistentDataContainer container = this.meta.getPersistentDataContainer();
         if (!this.meta.getPersistentDataContainer().has(key)) {
             this.meta.getPersistentDataContainer().set(key, PersistentDataType.BYTE, value);
@@ -79,58 +79,58 @@ public class ItemBuilder {
         return this;
     }
 
-    ItemBuilder setLore(String... lore) {
+    public ItemBuilder setLore(String... lore) {
         List<Component> componentList = new ArrayList<>();
         Arrays.stream(lore).forEach(l -> componentList.add(Component.text(l)));
         this.meta.lore(componentList);
         return this;
     }
 
-    ItemBuilder addLore(String lore) {
+    public ItemBuilder addLore(String lore) {
         this.meta.lore().add(Component.text(lore));
         return this;
     }
 
-    ItemBuilder setUnbreakable(boolean isUnbreakable) {
+    public ItemBuilder setUnbreakable(boolean isUnbreakable) {
         this.meta.setUnbreakable(isUnbreakable);
         return this;
     }
 
-    ItemBuilder addItemAttribute(ItemAttribute itemAttribute) {
+    public ItemBuilder addItemAttribute(ItemAttribute itemAttribute) {
         this.meta.addAttributeModifier(itemAttribute.getAttribute(), itemAttribute.get());
         return this;
     }
 
-    ItemBuilder addItemAttributes(ItemAttribute... itemAttribute) {
+    public ItemBuilder addItemAttributes(ItemAttribute... itemAttribute) {
         for (ItemAttribute attribute : itemAttribute) {
             this.addItemAttribute(attribute);
         }
         return this;
     }
 
-    ItemBuilder addEnchantment(Enchantment enchantment, int lvl) {
+    public ItemBuilder addEnchantment(Enchantment enchantment, int lvl) {
         this.item.setItemMeta(this.meta);
         this.item.addUnsafeEnchantment(enchantment, lvl);
         this.meta = this.item.getItemMeta();
         return this;
     }
 
-    ItemBuilder setName(String name) {
+    public ItemBuilder setName(String name) {
         this.meta.displayName(Component.text(name));
         return this;
     }
 
-    ItemBuilder setCustomModelId(int id) {
+    public ItemBuilder setCustomModelId(int id) {
         this.meta.setCustomModelData(id);
         return this;
     }
 
-    ItemBuilder addItemFlags(ItemFlag... itemFlags) {
+    public ItemBuilder addItemFlags(ItemFlag... itemFlags) {
         this.meta.addItemFlags(itemFlags);
         return this;
     }
 
-    ItemStack getItem() {
+    public ItemStack getItem() {
         this.item.setItemMeta(this.meta);
         return this.item;
     }

@@ -5,8 +5,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -14,9 +14,9 @@ public class CommandSingleton {
 
     private static final CommandSingleton command = new CommandSingleton();
 
-    private final Set<Command> registeredCommands = new HashSet<>();
+    private final List<Command> registeredCommands = new ArrayList<>();
 
-    private final Set<Command> unregisteredCommands = new HashSet<>();
+    private final List<Command> unregisteredCommands = new ArrayList<>();
 
     CommandSingleton() {
         Logger.info("Initiate Commands.");
@@ -67,4 +67,13 @@ public class CommandSingleton {
     public void registerCommands(List<Command> commands) {
         commands.stream().forEach(this::registerCommand);
     }
+
+    public List<Command> getRegisteredListeners() {
+        return registeredCommands;
+    }
+
+    public List<Command> getUnregisteredListeners() {
+        return unregisteredCommands;
+    }
+
 }

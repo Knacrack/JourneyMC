@@ -5,8 +5,8 @@ import de.knacrack.journeymc.utils.logging.Logger;
 import org.bukkit.Bukkit;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -14,9 +14,9 @@ public class ListenerSingleton {
 
     private static final ListenerSingleton listener = new ListenerSingleton();
 
-    private final Set<Listener> registeredListeners = new HashSet<>();
+    private final List<Listener> registeredListeners = new ArrayList<>();
 
-    private final Set<Listener> unregisteredListeners = new HashSet<>();
+    private final List<Listener> unregisteredListeners = new ArrayList<>();
 
     ListenerSingleton() {
         Logger.info("Initiate Listeners.");
@@ -48,11 +48,11 @@ public class ListenerSingleton {
         listeners.stream().forEach(this::registerListener);
     }
 
-    public Set<Listener> getRegisteredListeners() {
+    public List<Listener> getRegisteredListeners() {
         return registeredListeners;
     }
 
-    public Set<Listener> getUnregisteredListeners() {
+    public List<Listener> getUnregisteredListeners() {
         return unregisteredListeners;
     }
 
