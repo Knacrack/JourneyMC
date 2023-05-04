@@ -1,29 +1,37 @@
 package de.knacrack.journeymc.mob.list;
 
-import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.monster.Skeleton;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.craftbukkit.v1_19_R2.CraftServer;
 import org.bukkit.craftbukkit.v1_19_R2.CraftWorld;
-import org.bukkit.craftbukkit.v1_19_R2.inventory.CraftItemStack;
+import org.bukkit.craftbukkit.v1_19_R2.entity.CraftSkeleton;
+import org.bukkit.event.entity.CreatureSpawnEvent;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
-import java.util.ArrayList;
-import java.util.UUID;
+public class FranzSkeleton extends CraftSkeleton {
 
-public class FranzSkeleton extends Skeleton {
+    private Location l;
+
     public FranzSkeleton(Location loc) {
-        super(EntityType.SKELETON, ((CraftWorld) loc.getWorld()).getHandle());
-        this.setPos(loc.getX(), loc.getY(), loc.getZ());
-        this.setAggressive(true);
-        this.setItemSlot(EquipmentSlot.HEAD, CraftItemStack.asNMSCopy(new ItemStack(Material.IRON_HELMET)));
-        this.drops = new ArrayList<>();
-        this.forceDrops = false;
-        this.addEffect(new MobEffectInstance(net.minecraft.world.effect.MobEffect.byId(1), Integer.MAX_VALUE, 2));
-        this.addEffect(new MobEffectInstance(net.minecraft.world.effect.MobEffect.byId(11), Integer.MAX_VALUE, 2));
-        this.addEffect(new MobEffectInstance(net.minecraft.world.effect.MobEffect.byId(8), Integer.MAX_VALUE, 1));
-        this.setUUID(UUID.randomUUID());
+        super((CraftServer) Bukkit.getServer(), new Skeleton(EntityType.SKELETON, ((CraftWorld) loc.getWorld()).getHandle()));
+        l = loc;
+        setMaxHealth(50f);
+        getLocation(loc);
+        setHealth(50f);
+        getEquipment().setHelmet(new ItemStack(Material.IRON_HELMET));
+        getEquipment().setDropChance(EquipmentSlot.HEAD, 0f);
+        addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 2, false, false));
+        addPotionEffect(new PotionEffect(PotionEffectType.JUMP, Integer.MAX_VALUE, 1, false, false));
     }
+
+    public void spawn() {
+        spawnAt(l, CreatureSpawnEvent.SpawnReason.CUSTOM);
+    }
+
 }

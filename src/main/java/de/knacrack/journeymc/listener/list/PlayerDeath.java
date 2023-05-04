@@ -2,7 +2,7 @@ package de.knacrack.journeymc.listener.list;
 
 import de.knacrack.journeymc.Main;
 import de.knacrack.journeymc.listener.Listener;
-import de.knacrack.journeymc.utils.Utils;
+import de.knacrack.journeymc.utils.PlayerHead;
 import net.kyori.adventure.text.Component;
 import org.bukkit.NamespacedKey;
 import org.bukkit.event.EventHandler;
@@ -16,7 +16,7 @@ public class PlayerDeath implements Listener {
         String message = event.getDeathMessage();
         event.deathMessage(Component.text("§8[§r☠§8] §c" + message));
         if (event.getPlayer().getKiller() != null) {
-            event.getPlayer().getWorld().dropItem(event.getPlayer().getLastDeathLocation(), Utils.getSkullOfPlayer(event.getPlayer()));
+            event.getPlayer().getWorld().dropItem(event.getPlayer().getKiller().getLocation(), PlayerHead.getPlayerHead(event.getPlayer().getUniqueId()));
         }
     }
 

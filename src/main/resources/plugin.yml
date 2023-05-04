@@ -1,4 +1,4 @@
-name: Duschpalast
+name: JourneyMC
 version: '${project.version}'
 main: de.knacrack.journeymc.Main
 api-version: 1.19

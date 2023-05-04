@@ -17,7 +17,7 @@ public class EntityDamage implements Listener {
     @EventHandler
     public void onEntityDamage(EntityDamageEvent event) {
         Entity entity = event.getEntity();
-        if (event.getFinalDamage() != 0 && event instanceof LivingEntity) {
+        if (event.getFinalDamage() != 0 && entity instanceof LivingEntity) {
             Location location = entity.getLocation().add(0, 0.5, 0);
             double speed = 0.025;
 

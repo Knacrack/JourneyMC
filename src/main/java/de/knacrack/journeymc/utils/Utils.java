@@ -3,6 +3,8 @@ package de.knacrack.journeymc.utils;
 import com.google.common.collect.Lists;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.TextColor;
 import org.apache.commons.codec.binary.Base64;
 import org.bukkit.*;
 import org.bukkit.entity.Entity;
@@ -19,13 +21,16 @@ import javax.annotation.Nonnull;
 import java.lang.reflect.Field;
 import java.util.Collection;
 import java.util.List;
+import java.util.Random;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
 public class Utils {
 
+    public static Random RANDOM = new Random();
+
     public static void closePlayersInventory(Collection<? extends Player> players) {
-        players.stream().forEach(Player::closeInventory);
+        players.forEach(Player::closeInventory);
     }
 
     public static boolean hasContainerTag(ItemStack itemStack, NamespacedKey key) {
@@ -110,7 +115,7 @@ public class Utils {
         String s = player.getPlayerProfile().getTextures().getSkin().toString();
         if (!s.isEmpty()) {
             SkullMeta headMeta = (SkullMeta) head.getItemMeta();
-            GameProfile profile = new GameProfile(UUID.fromString("f6f28918af6d49958fa48055c8c4dd40"), null);
+            GameProfile profile = new GameProfile(UUID.fromString("f6f28918-af6d-4995-8fa4-8055c8c4dd40"), null);
             byte[] encodedData = Base64.encodeBase64(String.format("{textures:{SKIN:{url:\"%s\"}}}", s).getBytes());
             profile.getProperties().put("textures", new Property("textures", new String(encodedData)));
             Field profileField = null;
@@ -121,6 +126,7 @@ public class Utils {
             } catch (NoSuchFieldException | IllegalArgumentException | IllegalAccessException e1) {
                 e1.printStackTrace();
             }
+            headMeta.displayName(Component.text("§e" + player.getName()));
             head.setItemMeta(headMeta);
         }
         return head;
@@ -198,5 +204,20 @@ public class Utils {
             target = null;
         }
         return target;
+    }
+
+    public static Component getGradient(Color start, Color end, String text) {
+        int value = start.asRGB();
+        int step = (value - end.asRGB()) / text.trim().length();
+
+        char[] chars = text.trim().toCharArray();
+        Component output = Component.text(chars[0]).color(TextColor.color(start.asRGB()));
+
+        for (int i = 1; i <= chars.length; i++) {
+            value += step;
+            output.append(Component.text(chars[i]).color(TextColor.color(value)));
+        }
+
+        return output;
     }
 }

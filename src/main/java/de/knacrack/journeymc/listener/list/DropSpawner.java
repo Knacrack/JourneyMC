@@ -20,8 +20,8 @@ public class DropSpawner implements Listener {
     @EventHandler
     public void dropSpawner(BlockBreakEvent event) {
         Player player = event.getPlayer();
-        if(Material.SPAWNER.equals(event.getBlock().getType()) && player.getInventory().getItem(EquipmentSlot.HAND).containsEnchantment(Enchantment.SILK_TOUCH)) {
-            if(!event.getPlayer().isOp()) {
+        if (Material.SPAWNER.equals(event.getBlock().getType()) && player.getInventory().getItem(EquipmentSlot.HAND).containsEnchantment(Enchantment.SILK_TOUCH)) {
+            if (!event.getPlayer().isOp()) {
                 player.getInventory().setItem(EquipmentSlot.HAND, new ItemStack(Material.AIR));
             }
             event.setExpToDrop(0);
@@ -32,9 +32,9 @@ public class DropSpawner implements Listener {
 
             cs.setSpawnedType(type);
             meta.setBlockState(cs);
-            meta.displayName(Component.text( "§c§l" + " Spawner (" + type.name().toLowerCase() + ")"));
+            meta.displayName(Component.text("§c§l" + "Spawner (" + type.name().toLowerCase() + ")"));
             item.setItemMeta(meta);
-            player.getWorld().dropItem(event.getBlock().getLocation().add(0,1,0), item);
+            player.getWorld().dropItem(event.getBlock().getLocation().add(0, 1, 0), item);
         }
     }
 
