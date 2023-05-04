@@ -2,10 +2,8 @@ package de.knacrack.journeymc.listener.list;
 
 import de.knacrack.journeymc.Main;
 import de.knacrack.journeymc.listener.Listener;
-import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
-import org.bukkit.Particle;
 import org.bukkit.block.BlockState;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.world.PortalCreateEvent;

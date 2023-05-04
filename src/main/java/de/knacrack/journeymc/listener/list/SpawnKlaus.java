@@ -9,8 +9,6 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 
-import java.util.Random;
-
 public class SpawnKlaus implements Listener {
 
     @EventHandler

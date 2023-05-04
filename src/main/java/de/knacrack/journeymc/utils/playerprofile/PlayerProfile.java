@@ -2,7 +2,6 @@ package de.knacrack.journeymc.utils.playerprofile;
 
 import de.knacrack.journeymc.Main;
 import de.knacrack.journeymc.utils.Group;
-import de.knacrack.journeymc.utils.logging.Logger;
 import de.knacrack.journeymc.utils.uuid.UUIDFetcher;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;

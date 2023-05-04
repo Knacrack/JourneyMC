@@ -6,7 +6,6 @@ import de.knacrack.journeymc.item.ItemBuilder;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
-import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 
 public class MaraiasGreatsword implements Item {
